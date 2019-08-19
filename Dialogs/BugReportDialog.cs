@@ -82,7 +82,7 @@ namespace ShadyBot.Dialogs
 
         private async Task<DialogTurnResult> BugStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            stepContext.Values["phoneNumber"] = Convert.ToDateTime(((List<DateTimeResolution>)stepContext.Result).FirstOrDefault().Value);
+            stepContext.Values["phoneNumber"] = (string)stepContext.Result;
 
             return await stepContext.PromptAsync($"{nameof(BugReportDialog)}.bug",
                 new PromptOptions

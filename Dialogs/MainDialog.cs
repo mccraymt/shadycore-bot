@@ -15,7 +15,8 @@ namespace ShadyBot.Dialogs
         private readonly BotStateService _botStateService;
         #endregion
 
-        public MainDialog(string dialogId, BotStateService botStateService) : base(dialogId)
+        public MainDialog(BotStateService botStateService)
+            : base($"{nameof(MainDialog)}")
         {
             _botStateService = botStateService ?? throw new ArgumentNullException(nameof(botStateService));
             InitializeWaterfallDialog();
@@ -31,10 +32,12 @@ namespace ShadyBot.Dialogs
             };
 
             // Add Named Dialogs
-            AddDialog(new WaterfallDialog($"{nameof(MainDialog)}.mainFlow", waterfallSteps));
 
             AddDialog(new GreetingDialog($"{nameof(MainDialog)}.greeting", _botStateService));
             AddDialog(new BugReportDialog($"{nameof(MainDialog)}.bugReport", _botStateService));
+
+
+            AddDialog(new WaterfallDialog($"{nameof(MainDialog)}.mainFlow", waterfallSteps));
 
             // Set the starting Dialog
             InitialDialogId = $"{nameof(MainDialog)}.mainFlow";
@@ -48,7 +51,7 @@ namespace ShadyBot.Dialogs
             }
             else 
             {
-                return await stepContext.BeginDialogAsync($"{nameof(MainDialog)}.bugReport ", null, cancellationToken);
+                return await stepContext.BeginDialogAsync($"{nameof(MainDialog)}.bugReport", null, cancellationToken);
             }
         }
 
