@@ -18,13 +18,13 @@ namespace ShadyBot.Services
 
         // IDs
         public static string ConversationStateId { get; } = $"{nameof(BotStateService)}.ConversationData";
-        public static string UserProfileId { get; } = $"{nameof(BotStateService)}.UserProfile";
         public static string DialogStateId { get; } = $"{nameof(BotStateService)}.DialogState";
+        public static string UserProfileId { get; } = $"{nameof(BotStateService)}.UserProfile";
 
         // Accessors
         public IStatePropertyAccessor<ConversationData> ConversationDataAccessor { get; set; }
-        public IStatePropertyAccessor<UserProfile> UserProfilerAccessor { get; set; }
         public IStatePropertyAccessor<DialogState> DialogStateAccessor { get; set; }
+        public IStatePropertyAccessor<UserProfile> UserProfilerAccessor { get; set; }
         #endregion
 
         public BotStateService(ConversationState conversationState, UserState userState)
